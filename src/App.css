@@ -55,3 +55,16 @@ color: #e2e2e2;
 .coin-input::placeholder{
   color: #e2e2e2;
 }
+
+.charts{
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.convertor{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  padding: 50px;
+}

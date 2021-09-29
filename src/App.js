@@ -4,6 +4,7 @@ import Coin from "./Coin";
 import "./App.css";
 import axios from "axios";
 //import { symbol } from 'prop-types';
+import TradingViewWidget from "./TradingViewWidget";
 
 function App() {
   const [coins, setCoins] = useState([]);
@@ -29,34 +30,62 @@ function App() {
   )
 
   return (
-
-
     <div className="coin-app">
       <div className="coin-search">
-        <h1 className='coin-text'>currency</h1>
+        <h1 className="coin-text">currency</h1>
         <form>
-          <input type="text" placeholder="search" className="coin-input"
-            onChange={handleChange}/>
+          <input
+            type="text"
+            placeholder="search"
+            className="coin-input"
+            onChange={handleChange}
+          />
         </form>
-      
+      </div>
+      <div className="charts">
+        <coingecko-coin-compare-chart-widget
+          coin-ids="bitcoin,ethereum,eos,ripple,litecoin"
+          currency="usd"
+          locale="en"
+        ></coingecko-coin-compare-chart-widget>
+      </div>
+      <div></div>
+      <div className="convertor">
+        <crypto-converter-widget
+          shadow
+          symbol
+          live
+          background-color="#383a59"
+          border-radius="0.96rem"
+          fiat="iranian-rial"
+          crypto="bitcoin"
+          amount="1"
+          decimal-places="1"
+        ></crypto-converter-widget>
+        {/* <a href="https://currencyrate.today/" target="_blank" rel="noopener">
+          CurrencyRate.Today
+        </a> */}
+      </div>
+      <div>
+        <TradingViewWidget />
+      </div>
+      {filteredCoins.map((coin) => {
+        return (
+          <div>
+            <Coin
+              key={coin.id}
+              name={coin.name}
+              image={coin.image}
+              symbol={coin.symbol}
+              marketcap={coin.market_cap}
+              price={coin.current_price}
+              priceChange={coin.price_change_percentage_24h}
+              volume={coin.total_volume}
+            />
+          </div>
+        );
+      })}
     </div>
-      
-   {filteredCoins.map(coin => {
-     return <Coin
-         key={coin.id}
-         name={coin.name}
-         image={coin.image}
-         symbol={coin.symbol}
-         marketcap={coin.market_cap}
-         price={coin.current_price}
-         priceChange={coin.price_change_percentage_24h}
-         volume={coin.total_volume}
-       />
-      
-    })}
-    </div >
-    
-      
   );
 }
 export default App;
